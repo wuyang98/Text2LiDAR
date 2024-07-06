@@ -232,7 +232,6 @@ class Decoder(nn.Module):
         saliency_fea_1_1 = self.decoder4(saliency_fea_1_2)
         mask_1_1 = self.pre_1_1(saliency_fea_1_1)
         mask_1_1 = mask_1_1.transpose(1, 2).reshape(B, 2, self.img_size[0] // 1, self.img_size[1] // 1) # B,2,64,1024
-        ############################################################
         dwt_prepare = mask_1_1.clone()
         dwt = self.conv(dwt_prepare)
         dwt = self.sig(self.avg(dwt))
@@ -241,16 +240,5 @@ class Decoder(nn.Module):
         idwt = torch.cat((x_LL*dwt[:,0].unsqueeze(dim=1), x_HL*dwt[:,0].unsqueeze(dim=1), x_LH*dwt[:,0].unsqueeze(dim=1), x_HH*dwt[:,0].unsqueeze(dim=1)), 1)
         mask_1_1[:,0] = idwt_module(idwt)
 
-        # LLY,(LHY,HLY,HHY) = pywt.dwt2(mask_1_1[:,0].cpu().detach().numpy(), 'haar')
-        # LLY, LHY, HLY, HHY= torch.tensor(LLY).to(device), torch.tensor(LHY).to(device), torch.tensor(HLY).to(device), torch.tensor(HHY).to(device)
-        # mask_1_1[:,0] = torch.tensor(pywt.idwt2(((LLY*dwt[:,0]).cpu().detach().numpy(), (
-        #     (LHY*dwt[:,0]).cpu().detach().numpy(), 
-        #     (HLY*dwt[:,0]).cpu().detach().numpy(), 
-        #     (HHY*dwt[:,0]).cpu().detach().numpy()
-        #     )), 'haar')).to(device)
-        # mask_1_1[:,0].requires_grad = True
-
-
         return mask_1_1, [mask_1_2, mask_1_4, mask_1_8, mask_1_16]
-        # return mask_1_1
 
