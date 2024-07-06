@@ -170,11 +170,11 @@ def main(args):
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("--ckpt", type=Path, default='/project/r2dm-transformer-5decoder-dwt/logs/diffusion/kitti_360/spherical-1024/dwt-convpos/models/diffusion_0000300000.pth')
-    parser.add_argument("--num_steps", type=int, default=32)
+    parser.add_argument("--num_steps", type=int, default=16)
     parser.add_argument("--num_resample_steps", type=int, default=16)
-    parser.add_argument("--jump_length", type=int, default=2)
-    parser.add_argument("--seed", type=int, default=0) # 0
-    parser.add_argument("--sample_id", type=int, default=7711) # 666 441 4141 6161
+    parser.add_argument("--jump_length", type=int, default=1)
+    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--sample_id", type=int, default=7711)
     args = parser.parse_args()
     print(vars(args))
     main(args)
