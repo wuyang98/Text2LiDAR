@@ -30,17 +30,11 @@ def main(args):
     # =================================================================================
     # Sampling (reverse diffusion)
     # =================================================================================
-    timestamp = time.time()
-    local_time = time.ctime(timestamp)
-    print("本地时间：",timestamp)
     xs = ddpm.sample(
         batch_size=args.batch_size,
         num_steps=args.sampling_steps,
         return_all=True,
     ).clamp(-1, 1)
-    timestamp = time.time()
-    local_time = time.ctime(timestamp)
-    print("本地时间：",timestamp)
     # =================================================================================
     # Save as image or video
     # =================================================================================
@@ -66,8 +60,8 @@ def main(args):
         return img, bev
     
     img, bev = render(xs[-1])
-    save_image(img, "/project/r2dm-transformer-5decoder-dwt/forsupp_img.png", nrow=1)
-    save_image(bev, "/project/r2dm-transformer-5decoder-dwt/forsupp_bev.png", nrow=4)
+    save_image(img, "samples_img.png", nrow=1)
+    save_image(bev, "samples_bev.png", nrow=4)
 
     video = imageio.get_writer("/project/r2dm-transformer-5decoder-dwt/samples.mp4", mode="I", fps=60)
     t = 0
@@ -90,11 +84,11 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ckpt", type=Path, default='/project/r2dm-transformer-5decoder-dwt/logs/diffusion/kitti_360/spherical-1024/dwt-convpos/models/diffusion_0000300000.pth')
+    parser.add_argument("--ckpt", type=Path, default='')
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cuda")
     parser.add_argument("--batch_size", type=int, default=4)
     parser.add_argument("--sampling_steps", type=int, default=256)
-    parser.add_argument("--seed", type=int, default=516) # can be used: 3
+    parser.add_argument("--seed", type=int, default=516)
     args = parser.parse_args()
     args.device = torch.device(args.device)
     main(args)
