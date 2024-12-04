@@ -98,8 +98,8 @@ def sample(args):
 
 if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument("--ckpt", type=str, default='/project/r2dm-transformer-5decoder-dwt/logs/diffusion/kitti_360/spherical-1024/dwt-convpos/models/diffusion_0000300000.pth')
-    parser.add_argument("--output_dir", type=str, default='/project/r2dm-transformer-5decoder-dwt/logs/diffusion/kitti_360/spherical-1024/dwt-convpos/results')
+    parser.add_argument("--ckpt", type=str, default='your checkpoint path')
+    parser.add_argument("--output_dir", type=str, default='your results path')
     parser.add_argument("--batch_size", type=int, default=16)
     parser.add_argument("--num_samples", type=int, default=10_000)
     parser.add_argument("--num_steps", type=int, default=256)
