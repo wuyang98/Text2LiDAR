@@ -86,10 +86,10 @@ def main(args):
         return img, bev
     
     img, bev = render(xs[-1])
-    save_image(img, "/project/r2dm-main/logs/diffusion/nuScenes/spherical-1024/forpaper/results/samples_img.png", nrow=1)
-    save_image(bev, "/project/r2dm-main/logs/diffusion/nuScenes/spherical-1024/forpaper/results/samples_bev.png", nrow=4)
+    save_image(img, "your img path/samples_img.png", nrow=1)
+    save_image(bev, "your bev path/samples_bev.png", nrow=4)
 
-    video = imageio.get_writer("/project/r2dm-main/logs/diffusion/nuScenes/spherical-1024/forpaper/results/samples.mp4", mode="I", fps=60)
+    video = imageio.get_writer("your video path/samples.mp4", mode="I", fps=60)
     t = 0
     for x in tqdm(xs, desc="making video..."):
         t = t + 1
@@ -110,7 +110,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ckpt", type=Path, default='/project/r2dm-main/logs/diffusion/nuScenes/spherical-1024/forpaper/models/diffusion_0000400000.pth')
+    parser.add_argument("--ckpt", type=Path, default='your pth path')
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cuda")
     parser.add_argument("--batch_size", type=int, default=1)
     parser.add_argument("--sampling_steps", type=int, default=128)
