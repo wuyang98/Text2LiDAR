@@ -7,4 +7,6 @@ https://pan.baidu.com/s/15SQPlxt_zZJQScNdKLC_YQ and the password is 1661.
 You can also download nuScenes from this link:  
 https://nuscenes.org/nuscenes#download and replace the scene.json file with nuLiDARtext.json.
 
+You can download the checkpoint for text-controlled generation from this link:
+https://pan.baidu.com/s/1HG17mtubFO7NeOH3eSyMtA and the password is 1661
 
